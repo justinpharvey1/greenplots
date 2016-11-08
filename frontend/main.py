@@ -2,6 +2,8 @@ from flask import Flask
 from flask import request
 from flask import render_template
 import requests
+import pymysql
+
 app = Flask(__name__)
 
 
@@ -31,31 +33,7 @@ def result():
       json = {"params": {"zipcode": "03755", "acreage": "1", "beds": "1", "baths": "1", "price": "100000", "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
       listings = requests.post(lambdaURL, json = json)
       listings = listings.text
-      columnParts = listings.split("<COLUMNS>")
-      columns = columnParts[1]
-      columnParts = columns.split("</COLUMNS>")
-      columns = columnParts[0]
-      columns = columns.split("\t")
 
-      data = listings.split("<DATA>")
-      dataParts = data.split("\t")
-
-      
-
-      #columnParts = columns.split("\t")
-      #data = columnParts[2]
-      #dataParts = data.split("\t")
-
-
-      #print columnParts
-      #print dataParts
-
-
-
-
-
-
-      print "columns: ", columns
       print "Listing Text: ", listings
       return render_template("result.html", listings=str(listings))
 

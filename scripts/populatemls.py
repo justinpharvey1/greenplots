@@ -23,7 +23,7 @@ print loginResponse.text, "\n\n"
 RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/search"
 searchParams = {'SearchType': 'Property', 'Class': 'RE_1', 'QueryType': 'DMQL2', 'Format': 'COMPACT-DECODED', 
 'StandardNames': '0', 'Select': 'L_ListingID, L_AskingPrice, L_Address, LM_Int1_6, LM_int4_36, L_NumAcres, LM_Char10_30, LFD_WaterHeater_36, L_Zip', 
-'Query': '(ListPrice=50000+)', 'Count': '1', 'Limit': '10', 'Offset': '50000', 'rets-version': 'rets/1.8'}
+'Query': '(ListPrice=50000+)', 'Count': '1', 'Limit': '2500', 'Offset': '0', 'rets-version': 'rets/1.8'}
 searchResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
 print searchResponse.text, "\n\n"
 
@@ -78,10 +78,10 @@ photoID = dataSet[0]['L_ListingID'] + ":0"
 
 #Add photo URL's to dataset
 #Search for Properties
-RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/getObject"
-searchParams = {'Resource': 'Property', 'Location': '1', 'Type': 'Photo', 'Id': photoID , 'rets-version': 'rets/1.8'}
-photoResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
-print "Photo Response: ", photoResponse.content, "\n\n"
+#RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/getObject"
+#searchParams = {'Resource': 'Property', 'Location': '1', 'Type': 'Photo', 'Id': photoID , 'rets-version': 'rets/1.8'}
+#photoResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
+#print "Photo Response: ", photoResponse.content, "\n\n"
 #http://<Paragon.rets.server.url>/rets/fnisrets.aspx/mlsid/getObject?Resource=Property&Type=Photo&Id=910131:0
 
 

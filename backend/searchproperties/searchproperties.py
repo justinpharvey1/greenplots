@@ -2,7 +2,26 @@
 import sys
 import logging
 import requests
-from requests.auth import HTTPDigestAuth
+import pymysql
+
+
+
+#rds settings
+rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+name = "greenplots"
+password = "Greenplots1"
+db_name = "greenplotsdb"
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+
+try:
+    conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+except:
+    logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+    sys.exit()
+
 
 
 
@@ -22,30 +41,14 @@ def lambda_handler(event, context):
 	hasInsulation = params['insulation']
 
 
-	#Authentication 
-	RETS_USERNAME = "99262idx"
-	RETS_PASSWORD = "DVFGD7PSYh6yCt6RGzvf"
-	RETS_LOGIN_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/login?rets-version=rets/1.8"
-	loginParams = {'username': RETS_USERNAME, 'password': RETS_PASSWORD}
-
-	session = requests.session()
-
-	loginResponse = session.get(RETS_LOGIN_URL, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
+	query = "select * from mlsdata where (zipcode = 03755 and beds > 2 and price > 100000)"
 
 
-	#Search for Properties
-	RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/search"
-	searchQuery = "(ListPrice=" + str(price) + "+),(" + "Beds=" + beds + "+)"
-	searchParams = {'SearchType': 'Property', 'Class': 'ResidentialProperty', 'QueryType': 'DMQL2', 'Format': 'COMPACT', 'StandardNames': '1', 'Select': 'ListingID,ListPrice', 'Query': searchQuery, 'Count': '1', 'Limit': '15', 'rets-version': 'rets/1.8'}
-	searchResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
+	with conn.cursor() as cur:
+		cur.execute(query)
+	solarScore = cur.fetchall()
 
 
 
-	#Logout the session 
-	RETS_LOGOUT_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/Logout"
-	logoutParams = {'rets-version': 'rets/1.8.2'}
-	logoutResponse = session.get(RETS_LOGOUT_URL, params=logoutParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
 
-
-
-	return searchResponse.text
+	return solarScore
