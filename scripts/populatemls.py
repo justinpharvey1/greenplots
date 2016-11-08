@@ -74,6 +74,18 @@ print "data set: ", dataSet
 
 
 
+photoID = dataSet[0]['L_ListingID'] + ":0"
+
+#Add photo URL's to dataset
+#Search for Properties
+RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/getObject"
+searchParams = {'Resource': 'Property', 'Location': '1', 'Type': 'Photo', 'Id': photoID , 'rets-version': 'rets/1.8'}
+photoResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
+print "Photo Response: ", photoResponse.content, "\n\n"
+#http://<Paragon.rets.server.url>/rets/fnisrets.aspx/mlsid/getObject?Resource=Property&Type=Photo&Id=910131:0
+
+
+
 #Logout the session 
 RETS_LOGOUT_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/Logout"
 logoutParams = {'rets-version': 'rets/1.8.2'}
