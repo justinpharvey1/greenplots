@@ -41,9 +41,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
-                    <span class="glyphicon glyphicon-fire"></span> 
-                    LOGO
+                <a class="navbar-brand" href="#">
+                    <!-- <span class="glyphicon glyphicon-tree-deciduous"></span> -- >
+                    <!-- <img src = "http://imgur.com/a/IDNCH"/> -->
+                    Green Plots
                 </a>
             </div>
             <!-- Navbar links -->
@@ -89,7 +90,7 @@
                     <p>ZipCode <input type = "text" name = "ZipCode" />
                         Acreage
                         <select name="Acreage">
-                            <option value="0">0-1</option>
+                            <option value="0">0+</option>
                             <option value="1">1+</option>
                             <option value="2">2+</option>
                             <option value="5">5+</option>
@@ -131,4 +132,17 @@
             </div>
         </div>
     </section>
+
+
+    {% if listings %}
+        <section>
+            <h1> Matching Listings Are...</h1>
+                {% for item in listings %}
+                    <h1> Listing: {{ item }}</h1>
+                {% endfor %}
+        </section>
+    {% endif %}
+    
+
+
 </body>

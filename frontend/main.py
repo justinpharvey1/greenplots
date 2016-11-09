@@ -33,12 +33,12 @@ def result():
       result = request.form
       lambdaURL = "https://nlcvv8kgd0.execute-api.us-west-2.amazonaws.com/prod"
       headers = {'Content-Type', 'application/json'}
-      jsonParams = {"params": {"zipcode": result['zipcode'], "acreage": result['acreage'], "beds": result['beds'], "baths": result['baths'], "price": result['price'], "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
+      jsonParams = {"params": {"zipcode": result['ZipCode'], "acreage": result['Acreage'], "beds": result['Beds'], "baths": result['Baths'], "price": result['Price'], "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
       listings = requests.post(lambdaURL, json = jsonParams)
       listings = json.loads(listings.content)
 
       #print "Listing Text: ", listings
-      return render_template("result.html", listings=listings)
+      return render_template("findyourhome.html", listings=listings)
 
 
 
