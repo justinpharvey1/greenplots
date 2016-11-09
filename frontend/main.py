@@ -3,6 +3,9 @@ from flask import request
 from flask import render_template
 import requests
 import pymysql
+import sys
+import logging
+import json
 
 app = Flask(__name__)
 
@@ -30,12 +33,12 @@ def result():
       result = request.form
       lambdaURL = "https://nlcvv8kgd0.execute-api.us-west-2.amazonaws.com/prod"
       headers = {'Content-Type', 'application/json'}
-      json = {"params": {"zipcode": "03755", "acreage": "1", "beds": "1", "baths": "1", "price": "100000", "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
-      listings = requests.post(lambdaURL, json = json)
-      listings = listings.text
+      jsonParams = {"params": {"zipcode": result['zipcode'], "acreage": result['acreage'], "beds": result['beds'], "baths": result['baths'], "price": result['price'], "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
+      listings = requests.post(lambdaURL, json = jsonParams)
+      listings = json.loads(listings.content)
 
-      print "Listing Text: ", listings
-      return render_template("result.html", listings=str(listings))
+      #print "Listing Text: ", listings
+      return render_template("result.html", listings=listings)
 
 
 

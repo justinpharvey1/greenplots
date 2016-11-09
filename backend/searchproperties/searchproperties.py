@@ -40,15 +40,37 @@ def lambda_handler(event, context):
 	hasWellWater = params['wellwater']
 	hasInsulation = params['insulation']
 
+	prices = price.split("-")
+	lowPrice = prices[0]
+	highPrice = prices[1]
 
-	query = "select * from mlsdata where (zipcode = 03755 and beds > 2 and price > 100000)"
 
+
+	query = "select * from mlsdata where (zipcode = " + str(zipCode) + " and acreage > " + str(acreage) + " and beds > " + str(beds) + " and baths > " + str(baths) + " and price between " + str(lowPrice) + " and " + str(highPrice) + ")"
+	print query
 
 	with conn.cursor() as cur:
 		cur.execute(query)
-	solarScore = cur.fetchall()
+	queryData = cur.fetchall()
+
+
+	columns = "SHOW COLUMNS FROM mlsdata"
+
+	with conn.cursor() as cur:
+		cur.execute(columns)
+	columnlist = cur.fetchall()
+
+	returnData = []
+
+	for result in queryData:
+		counter = 0
+		listing = {}
+		for element in result:
+			listing[columnlist[counter][0]] = element
+			counter = counter + 1
+		returnData.append(listing)
 
 
 
 
-	return solarScore
+	return returnData
