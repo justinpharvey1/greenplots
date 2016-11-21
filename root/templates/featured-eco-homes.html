@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Greenplots</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
+    <link href="../static/css/custom.css" rel="stylesheet">
+    <link rel='stylesheet' id='realexpert_bootstrap_responsive_css-css'  href='../static/library/bootstrap/css/bootstrap-responsive.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='realexpert_font_awesome_css-css'  href='../static/library/font-awesome/css/font-awesome.min.css' type='text/css' media='all' />
+	<link rel='stylesheet' id='realexpert_font_awesome_css_ie7-css'  href='../static/library/font-awesome/css/font-awesome-ie7.min.css' type='text/css' media='all' />
+ 
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom Fonts from Google -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+</head>
+
+<body>
+
+       <!-- Navigation -->
+    <nav id="siteNav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <!-- <span class="glyphicon glyphicon-tree-deciduous"></span> -- >
+                    <!-- <img src = "http://imgur.com/a/IDNCH"/> -->
+                    Green Plots
+                </a>
+            </div>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                      <li >
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="featured-eco-homes.html">Featured Eco-Homes</a>
+                    </li>
+                     <li>
+                        <a href="find-your-home.html">Find Your Home</a>
+                    </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                    </li>
+                </ul>
+                
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+
+
+  
+
+
+    <!-- Intro Section -->
+    <header id="banner">
+			<div id="banner_container" class="container">
+				<h3 class="banner-title">Featured Eco-Homes</h3>
+				<p class="banner-subtitle"></p>
+			</div>
+		</header>
+	
+    <div class="content-wrapper clearfix">
+			<div class="container"><!-- container via hooks -->
+				<div id="main" class="row-fluid">
+					<section  id="content" class="span12" role="main">
+						<div id="archive-wrapper">
+							
+							<div class="row-fluid">
+
+
+							{% for listing in listings %}
+        						
+    						
+								<div class="row-fluid property-listing status-35 clearfix">
+									<div class="listing-image span5">
+										<div class="property-image-container">
+											<a href="property-single.html" title="Florida 5, Pinecrest, FL">
+												<img width="540" height="360" src= {{ listing.imageurls[0] }} class="attachment-real-property-loop wp-post-image" alt="Florida 5, Pinecrest, FL" title="Florida 5, Pinecrest, FL" />
+											</a>
+										</div><!-- /.property-images-container -->
+										<div class="listing-meta">
+											<ul>
+												<li class="meta-size"><i class="ico-size"></i>{{ listing.sqft }}</li>
+												<li class="meta-bedroom"><i class="ico-bedroom"></i>{{ listing.beds }}</li>
+												<li class="meta-bathroom"><i class="ico-bathroom"></i>{{ listing.baths }}</li>
+												<li class="meta-garage"><i class="ico-garage"></i>{{ listing.acreage }}</li>
+											</ul>
+										</div>
+									</div>
+									<div class="listing-info span7">
+										<div class="listing-title">
+											<a href="property-single.html" title="Florida 5, Pinecrest, FL">{{ listing.address }}</a>
+											
+										</div>
+                                        <div class="badges1">
+                                            {% for badge in listing.badges %}
+
+                                                {% if badge|string() == 'electric'|string() %}
+                                                <img width="50" height="50" src="../static/images/heating.png" alt="heating" title="heating" /> 
+                                                {% endif %}
+                                                
+                                                {% if badge|string() == 'wellwater'|string() %}
+                                                <img width="50" height="50" src="../static/images/water.png" alt="water" title="water" />
+                                                {% endif %}
+
+                                                {% if badge|string() == 'certified'|string() %}
+                                                <img width="50" height="50" src="../static/images/member.png" alt="member" title="member" /> 
+                                                {% endif %}
+
+                                                {% if badge|string() == 'solar'|string() %}
+                                                <img width="50" height="50" src="../static/images/solar.png" alt="solar" title="solar" />
+                                                {% endif %}
+
+                                            {% endfor %}
+                                        </div> 
+										<div class="listing-content">
+											<div class="listing-property-price">
+												<sup class="price-curr">$</sup>{{ listing.price }}&nbsp;
+												<span class="price-postfix"></span>
+											</div>
+											<div class="listing-excerpt">
+												<p>{{ listing.description }}</p>
+											</div>
+										</div>
+                                        <div class="ecoscore">
+                                        <h3>Eco Score: {{ listing.ecoscore }}</h3>
+                                        </div>
+									</div>
+									<div class="property-status status-35-text">For Sale</div>
+								</div><!-- /.property-listing -->
+
+							{% endfor %}	
+							</div>
+						</div><!-- /#archive-wrapper --></section><!-- #content -->
+					 
+				</div><!-- /#main -->
+			</div><!-- /.container-->
+		</div>
+
+     
+     
+     
+     
+     
+    
+</body>

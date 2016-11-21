@@ -46,12 +46,16 @@ def lambda_handler(event, context):
 		#Based on Certification
 		if str(row['greenreport']) == "Platinum":
 			ecoscore = 99
+			badges.append("certified")
 		if str(row['greenreport']) == "Gold":
 			ecoscore = 91
+			badges.append("certified")
 		if str(row['greenreport']) == "Silver":
 			ecoscore = 85
+			badges.append("certified")
 		if str(row['greenreport']) == "Certified":
 			ecoscore = 79
+			badges.append("certified")
 
 		#Based on sqft
 		if ecoscore == 0:

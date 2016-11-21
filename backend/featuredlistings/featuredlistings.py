@@ -70,9 +70,9 @@ def lambda_handler(event, context):
 			counter = counter + 1
 		returnData.append(listing)
 
-
+	#print returnData
 	return returnData
 
 
 
-lambda_handler(event="event", context="context")
+#lambda_handler(event="event", context="context")

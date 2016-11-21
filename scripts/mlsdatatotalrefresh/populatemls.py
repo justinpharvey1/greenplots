@@ -61,7 +61,7 @@ def uploadBatch():
 	#Search for Properties
 	RETS_SEARCH_URL = "http://neren.rets.paragonrels.com/rets/fnisrets.aspx/NEREN/search"
 	searchParams = {'SearchType': 'Property', 'Class': 'RE_1', 'QueryType': 'DMQL2', 'Format': 'COMPACT-DECODED', 
-	'StandardNames': '0', 'Select': 'L_ListingID, L_AskingPrice, L_Address, LM_Int1_6, LM_int4_36, L_NumAcres, LM_Char10_30, LFD_WaterHeater_36, L_Zip, LM_Int4_16, LFD_Water_35, LFD_Electric_9', 
+	'StandardNames': '0', 'Select': 'L_ListingID, L_AskingPrice, L_Address, LM_Int1_6, LM_int4_36, L_NumAcres, LM_Char10_30, LFD_WaterHeater_36, L_Zip, LM_Int4_16, LFD_Water_35, LFD_Electric_9, LR_remarks22', 
 	'Query': '(ListPrice=50000+)', 'Count': '1', 'Limit': '2500', 'Offset': OFFSET_COUNT, 'rets-version': 'rets/1.8'}
 	searchResponse = session.get(RETS_SEARCH_URL, params=searchParams, auth=HTTPDigestAuth(RETS_USERNAME, RETS_PASSWORD))
 	print searchResponse.text, "\n\n"
@@ -140,7 +140,7 @@ def uploadBatch():
 	cur = conn.cursor()
 	for listing in dataSet:
 		try:
-			insertStatement = "INSERT IGNORE INTO mlsdata (listingid, price, acreage, beds, baths, address, zipcode, currentheater, greenreport, sqft, water, currentsolar) VALUES (" + str(listing['L_ListingID']) + "," + str(listing['L_AskingPrice']) + "," + str(listing['L_NumAcres']) + "," + str(listing['LM_Int1_6'])  + "," + str(listing['LM_int4_36']) + ",'" + str(listing['L_Address']) + "'," + str(listing['L_Zip']) + ",'" + str(listing['LFD_WaterHeater_36']) + "','" + str(listing['LM_Char10_30']) + "','" + str(listing['LM_Int4_16']) + "','" + str(listing['LFD_Water_35']) +  "','" + str(listing['LFD_Electric_9']) + "')"
+			insertStatement = "INSERT IGNORE INTO mlsdata (listingid, price, acreage, beds, baths, address, zipcode, currentheater, greenreport, sqft, water, currentsolar, description) VALUES (" + str(listing['L_ListingID']) + "," + str(listing['L_AskingPrice']) + "," + str(listing['L_NumAcres']) + "," + str(listing['LM_Int1_6'])  + "," + str(listing['LM_int4_36']) + ",'" + str(listing['L_Address']) + "'," + str(listing['L_Zip']) + ",'" + str(listing['LFD_WaterHeater_36']) + "','" + str(listing['LM_Char10_30']) + "','" + str(listing['LM_Int4_16']) + "','" + str(listing['LFD_Water_35']) +  "','" + str(listing['LFD_Electric_9']) + "','" + str(listing['LR_remarks22']) + "')"
 			print insertStatement
 			cur.execute(insertStatement)
 		except Exception as e:
