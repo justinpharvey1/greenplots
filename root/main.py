@@ -7,6 +7,7 @@ import sys
 import logging
 import json
 
+
 app = Flask(__name__)
 
 
@@ -14,7 +15,6 @@ app = Flask(__name__)
 @app.route('/index.html')
 def homepage():
   return render_template('index.html')
-
 
 
 @app.route('/featured-eco-homes.html')
@@ -25,6 +25,47 @@ def featuredlistings():
 
   print listings
 
+  listings = normalizeListingsData(listings)
+
+
+  return render_template('featured-eco-homes.html', listings=listings)
+
+
+
+
+@app.route('/find-your-home.html', methods= ['GET'])
+def findyourhome():
+  zipcode = request.args.get('zipcode', '')
+  acreage = request.args.get('acreage', '')
+  beds = request.args.get('beds', '')
+  baths = request.args.get('baths', '')
+  price = request.args.get('price', '')
+
+  if len(zipcode) > 2:
+    lambdaURL = "https://nlcvv8kgd0.execute-api.us-west-2.amazonaws.com/prod"
+    headers = {'Content-Type', 'application/json'}
+    jsonParams = {"params": {"zipcode": zipcode, "acreage": acreage, "beds": beds, "baths": baths, "price": price, "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
+    listings = requests.post(lambdaURL, json = jsonParams)
+    listings = json.loads(listings.content)
+    listings = normalizeListingsData(listings)
+    print "Listings: ", listings
+    return render_template('find-your-home.html', listings=listings)
+
+  else:
+    print "checkpoint"
+    listings = []
+    return render_template('find-your-home.html', name="its working")
+
+
+
+
+@app.route('/blog')
+def blog():
+	return render_template('blog.html', name="its working")
+
+
+
+def normalizeListingsData(listings):
   #Deal with badges
   for listing in listings:
     badges = listing['badges']
@@ -52,32 +93,4 @@ def featuredlistings():
       listing['imageurls'] = "null"
 
 
-  return render_template('featured-eco-homes.html', listings=listings)
-
-
-
-@app.route('/find-your-home.html')
-def findyourhome():
-	return render_template('find-your-home.html', name="its working")
-
-
-
-
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-   if request.method == 'POST':
-      result = request.form
-      lambdaURL = "https://nlcvv8kgd0.execute-api.us-west-2.amazonaws.com/prod"
-      headers = {'Content-Type', 'application/json'}
-      jsonParams = {"params": {"zipcode": result['ZipCode'], "acreage": result['Acreage'], "beds": result['Beds'], "baths": result['Baths'], "price": result['Price'], "solar": "true", "electricheater": "true", "wellwater": "true", "insulation": "true"}}
-      listings = requests.post(lambdaURL, json = jsonParams)
-      listings = json.loads(listings.content)
-
-      #print "Listing Text: ", listings
-      return render_template("findyourhome.html", listings=listings)
-
-
-
-@app.route('/blog')
-def blog():
-	return render_template('blog.html', name="its working")
+  return listings
