@@ -40,13 +40,25 @@ def lambda_handler(event, context):
 	hasWellWater = params['wellwater']
 	hasInsulation = params['insulation']
 
+
+	#Dummy Payload
+	#zipCode = "03755"
+	#acreage = 1
+	#beds = 1
+	#baths = 1
+	#price = "100000-1000000"
+
+
+	if str(zipCode)[0] is "0":
+		zipCode = zipCode[1:]
+		print "zipCode: ", zipCode
+
+
 	prices = price.split("-")
 	lowPrice = prices[0]
 	highPrice = prices[1]
 
-
-
-	query = "select * from mlsdata where (zipcode = " + str(zipCode) + " and acreage > " + str(acreage) + " and beds > " + str(beds) + " and baths > " + str(baths) + " and price between " + str(lowPrice) + " and " + str(highPrice) + ")"
+	query = "select * from mlsdata where (validzipcodes LIKE '%" + str(zipCode) + "%'" + " and acreage > " + str(acreage) + " and beds > " + str(beds) + " and baths > " + str(baths) + " and price between " + str(lowPrice) + " and " + str(highPrice) + ")" + " order by ecoscore desc limit 30"
 	print query
 
 	with conn.cursor() as cur:
@@ -71,6 +83,12 @@ def lambda_handler(event, context):
 		returnData.append(listing)
 
 
+	for element in returnData:
+		print element
 
 
+
+	print returnData
 	return returnData
+
+#lambda_handler(event="event",context="context")
