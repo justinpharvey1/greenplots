@@ -55,4 +55,4 @@ def lambda_handler(event, context):
 	return returnData
 
 
-lambda_handler(event="event",context="context")
+#lambda_handler(event="event",context="context")
