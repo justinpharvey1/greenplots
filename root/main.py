@@ -6,8 +6,7 @@ import pymysql
 import sys
 import logging
 import json
-
-
+from urlparse import urlparse
 app = Flask(__name__)
 
 
@@ -20,6 +19,7 @@ def homepage():
 @app.route('/featured-eco-homes.html')
 def featuredlistings():
   lambdaURL = "https://u75irk8wpe.execute-api.us-west-2.amazonaws.com/prod"
+  headers = {'Content-Type', 'application/json'}
   listings = requests.post(lambdaURL)
   listings = json.loads(listings.content)
 
@@ -58,10 +58,32 @@ def findyourhome():
 
 
 
+@app.route('/property-single.html')
+def propertysingle():
+  listingid = request.args.get('listingid')
+  lambdaURL = "https://cr2jk3hj7b.execute-api.us-west-2.amazonaws.com/prod"
+  headers = {'Content-Type', 'application/json'}
+  jsonParams = {"params": {"listingid": str(listingid)}}
+  listing = requests.post(lambdaURL, json = jsonParams)
+  listing = json.loads(listing.content)
+  listing = normalizeListingsData(listing)
+  print "\nLISTING:", listing[0]
 
-@app.route('/blog')
+
+  #for element in listing:
+    #print "Element \n\n", element
+  return render_template('property-single.html', listing=listing[0])
+
+
+
+@app.route('/blog.html')
 def blog():
-	return render_template('blog.html', name="its working")
+  lambdaURL = "https://2axsa07n85.execute-api.us-west-2.amazonaws.com/prod"
+  headers = {'Content-Type', 'application/json'}
+  posts = requests.post(lambdaURL)
+  posts = json.loads(posts.content)
+  print posts
+  return render_template('blog.html', posts=posts)
 
 
 

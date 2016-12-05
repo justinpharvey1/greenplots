@@ -76,18 +76,6 @@
         </div><!-- /.container -->
     </nav>
 
-
-  
-
-
-    <!-- Intro Section -->
-    <header id="banner">
-			<div id="banner_container" class="container">
-				<h3 class="banner-title">Find Your Home</h3>
-				<p class="banner-subtitle"></p>
-			</div>
-		</header>
-	
     <div class="content-wrapper clearfix">
 			<div class="container">
 				<div id="archive-wrapper">
@@ -155,19 +143,181 @@
 										</select>
 									</span>
 								</div>
-							 
+
+
+
+
+								<!-- Animation --> 
+								<script>
+  								function toggleVisibility(id) {
+  									var filestring = "";
+
+  									var solar = document.getElementById("checksolar");
+  									if (solar.checked){
+  										filestring = filestring + "_solar";
+  									}
+
+
+  									var bubble = document.getElementById("checkleed");
+  									if (bubble.checked){
+  										filestring = filestring + "_bubble";
+  									}
+
+
+  									var water = document.getElementById("checkwell");
+  									if (water.checked){
+  										filestring = filestring + "_well";
+  									}
+
+
+  									var heater = document.getElementById("checkheater");
+  									if (heater.checked){
+  										filestring = filestring + "_heater";
+  									}
+  									
+
+
+  									alert(filestring);
+
+
+
+
+
+
+
+   									var el = document.getElementById(filestring);
+   									el.style.visibility=="visible"
+
+								</script>
+
+
+
+
+								<div class="option-bar location">
+									<span class="selectwrap">
+										<label for="checksolar">Solar</label>
+										<input type="checkbox" id="checksolar" onChange="toggleVisibility('solarimage');" /><br/>
+									</span>
+								</div>
+							 	<div class="option-bar location">
+									<span class="selectwrap">
+										<label for="checkleed">Certified Insulation</label>
+										<input type="checkbox" id="checkleed" onChange="toggleVisibility('insulationimage');" /><br/>
+									</span>
+								</div>
+								<div class="option-bar location">
+									<span class="selectwrap">
+										<label for="checkwell">Private Well</label>
+										<input type="checkbox" id="checkwell" onChange="toggleVisibility('wellimage');" /><br/>
+									</span>
+								</div>
+
+								<div class="option-bar location">
+									<span class="selectwrap">
+										<label for="checkheater">Efficient Water Heating</label>
+										<input type="checkbox" id="checkheater" onChange="toggleVisibility('heaterimage');" /><br/>
+									</span>
+								</div>
 															 
 								<div class="option-submit">
-									<input type = "submit" value = "submit" /></p>
+									<input type = "submit" class="advance-button-search" value="&nbsp;" /></p>
 								</div>
 							</form>
 						</div><!-- /.as-form-wrapper -->
+
+
+
+						{% if listings is not defined %}
+						<div class="animation-countainer">
+							<img id="houserender" src="../static/images/houserenders/houserender.png" style="position:absolute; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar" src="../static/images/housrenders/houserender_solar.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_bubble" src="../static/images/houserenders/houserender_solar_bubble" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_well" src="../static/images/houserenders/houserender_solar_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_heater" src="../static/images/houserenders/housrender_solar_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_bubble_well" src="../static/images/houserenders/housrender_solar_bubble_well" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="housrender_solar_well_heater" src="../static/images/houserenders/houserender_solar_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_bubble_heater" src="../static/images/housrenders/housrender_solar_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_solar_bubble_well_heater" src="../static/images/housrenders/houserender_solar_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_bubble" src="../static/images/housrenders/houserender_bubble.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="housrender_bubble_well" src="../static/images/housrenders/housrender_bubble_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="housrender_bubble_heater" src="../static/images/housrenders/houserender_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_bubble_well_heater" src="../static/images/housrenders/houserender_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="houserender_well" src="../static/images/housrenders/houserender_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="housrender_well_heater" src="../static/images/houserenders/houserender_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+
+						<div class="animation-container">
+							<img id="housrender_heater" src="../static/images/housrenders/houserender_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+						</div>
+						{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- search results if listing variable present -->	
 					</section><!-- /.advance-search -->
 					{% for listing in listings %}
 								<div class="row-fluid property-listing status-35 clearfix">
 									<div class="listing-image span5">
 										<div class="property-image-container">
-											<a href="property-single.html" title="Florida 5, Pinecrest, FL">
+											<a href="{{ url_for('propertysingle',listingid=listing.listingid) }}">
 												<img width="540" height="360" src= {{ listing.imageurls[0] }} class="attachment-real-property-loop wp-post-image" alt="Florida 5, Pinecrest, FL" title="Florida 5, Pinecrest, FL" />
 											</a>
 										</div><!-- /.property-images-container -->
@@ -182,7 +332,7 @@
 									</div>
 									<div class="listing-info span7">
 										<div class="listing-title">
-											<a href="property-single.html" title="Florida 5, Pinecrest, FL">{{ listing.address }}</a>
+											<a href="{{ url_for('propertysingle',listingid=listing.listingid) }}" title="Florida 5, Pinecrest, FL">{{ listing.address }}</a>
 											
 										</div>
                                         <div class="badges1">

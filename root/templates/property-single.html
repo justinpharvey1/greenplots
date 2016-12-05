@@ -74,19 +74,6 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
-
-
-  
-
-
-    <!-- Intro Section -->
-    <header id="banner">
-			<div id="banner_container" class="container">
-				<h3 class="banner-title">Featured Eco-Homes</h3>
-				<p class="banner-subtitle"></p>
-			</div>
-		</header>
-	
     <div class="content-wrapper clearfix">
 			<div class="container"><!-- container via hooks -->
 				<div id="main" class="row-fluid">
@@ -96,58 +83,67 @@
 								<div id="myCarousel" class="carousel slide">
 									<!-- Carousel items -->
 									<div class="carousel-inner">
-										<div class='item active'><img src="../static/images/dummy-870x350.png" width='1170' height='350' alt='' /></div>
-										<div class='item '><img src="../static/images/dummy-870x350.png" width='1170' height='350' alt='' /></div>
-										<div class='item '><img src="../static/images/dummy-870x350.png" width='1170' height='350' alt='' /></div>
-										<div class='item '><img src="../static/images/dummy-870x350.png" width='1170' height='350' alt='' /></div>
-										<div class='item '><img src="../static/images/dummy-870x350.png" width='1170' height='350' alt='' /></div>
+										<div class='item active'><img src={{ listing.imageurls[0] }} width='1170' height='350' alt='' /></div>
+										{% for image in listing.imageurls %}
+											<div class='item '><img src={{ image }} width='1170' height='350' alt='' /></div>
+										{% endfor %}
 									</div>
 									<div class="carousel-thumbnail">
 										<!-- Carousel nav -->
 										<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
 										<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 										<ol class="carousel-indicators hidden-phone">
-											<li data-target='#myCarousel' data-slide-to='0' class='active'><img src="../static/images/dummy-80x80.png" width='80' height='80' alt='' /></li>
-											<li data-target='#myCarousel' data-slide-to='1' class=''><img src="../static/images/dummy-80x80.png" width='80' height='80' alt='' /></li>
-											<li data-target='#myCarousel' data-slide-to='2' class=''><img src="../static/images/dummy-80x80.png" width='80' height='80' alt='' /></li>
-											<li data-target='#myCarousel' data-slide-to='3' class=''><img src="../static/images/dummy-80x80.png" width='80' height='80' alt='' /></li>
-											<li data-target='#myCarousel' data-slide-to='4' class=''><img src="../static/images/dummy-80x80.png" width='80' height='80' alt='' /></li>
+											{% set count = 1 -%}
+											{% for image in listing.imageurls %}
+												<li data-target='#myCarousel' data-slide-to={{ count }} class='active'><img src={{ image }} width='80' height='80' alt='' /></li>
+												{% set count = count + 1 %}
+											{% endfor %}	
 										</ol>
 								  </div>
 								</div>
 							</div><!-- /#property_slider_wrapper -->
 							<div id="single_property_meta_wrapper">
 								<div class="single-property-meta clearfix status-35-text">
-								<!---------------#Property Details#------------------------->
-									<span class="meta-size"><i class="ico-size"></i>240M</span>
-									<span class="meta-bedroom"><i class="ico-bedroom"></i>3<span class="meta-hidden"> Bedrooms</span></span>
-									<span class="meta-bathroom"><i class="ico-bathroom"></i>5<span class="meta-hidden"> Bathrooms</span></span>
-									<span class="meta-garage"><i class="ico-garage"></i>1<span class="meta-hidden"> Garages</span></span>
-									<span class="meta-print visible-desktop"><i class="ico-print"></i>
-										<span class="print-hidden"><a href="javascript:window.print()">Print this page</a></span>
-									</span>
+									<span class="meta-size"><i class="ico-size"></i>{{ listing.sqft }}</span>
+									<span class="meta-bedroom"><i class="ico-bedroom"></i>3<span class="meta-hidden"> {{ listing.beds }}</span></span>
+									<span class="meta-bathroom"><i class="ico-bathroom"></i>5<span class="meta-hidden"> {{ listing.baths }}</span></span>
+									<span class="meta-garage"><i class="ico-garage"></i>1<span class="meta-hidden"> {{ listing.acreage }}</span></span>
 									<span class="meta-status">For Sale</span>
 								</div>
 							</div>
 							<div class="single-property-content-wrapper">
 								<header class="single-property-header">
-								<!---------------#Property Title#--------------------->
-									<h3 class="single-property-title">Florida 5, Pinecrest, FL</h3>
-								<!---------------#Property Address#----------------------->
-									<p class="single-property-address">Pinecrest, FL, USA</p>
+									<h3 class="single-property-title">{{ listing.address }}</h3>
+									<p class="single-property-address">{{ listing.address }}</p>
 								</header>
-                              <div class="badges1"><img width="50" height="50" src="../static/images/heating.png" alt="heating" title="heating" /> <img width="50" height="50" src="../static/images/water.png" alt="water" title="water" /> <img width="50" height="50" src="../static/images/member.png" alt="member" title="member" /> <img width="50" height="50" src="../static/images/solar.png" alt="solar" title="solar" /></div> 
+                              	<div class="badges1">
+                              		{% for badge in listing.badges %}
+
+
+                              					{% if badge|string() == 'certified'|string() %}
+                                                <img width="50" height="50" src="../static/images/member.png" alt="member" title="member" /> 
+                                                {% endif %}
+
+                                                {% if badge|string() == 'electric'|string() %}
+                                                <img width="50" height="50" src="../static/images/heating.png" alt="heating" title="heating" /> 
+                                                {% endif %}
+                                                
+                                                {% if badge|string() == 'wellwater'|string() %}
+                                                <img width="50" height="50" src="../static/images/water.png" alt="water" title="water" />
+                                                {% endif %}
+
+                                                
+
+                                                {% if badge|string() == 'solar'|string() %}
+                                                <img width="50" height="50" src="../static/images/solar.png" alt="solar" title="solar" />
+                                                {% endif %}
+                                    {% endfor %}
+                                </div> 
 								<div class="single-property-price">
-								<!--------------#Property Price#------------->
-									<p><h3><sup class="price-curr">$</sup>16,000&nbsp;<span class="price-postfix"></span></h3></p>
+									<p><h3><sup class="price-curr">$</sup>{{ listing.price }}&nbsp;<span class="price-postfix"></span></h3></p>
 								</div>
                                 
-								<div class="single-property-content">
-								<!------------------#Property Descroption#----------------->
-									<p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-									<p>&nbsp;</p>
-								</div>
+								<div class="single-property-content"> {{ listing.description }} &nbsp;</p> </div>
 							 
 								 
 								 

@@ -83,7 +83,7 @@
     <!-- Intro Section -->
     <header id="banner">
 			<div id="banner_container" class="container">
-				<h3 class="banner-title">Eco-Home Blog</h3>
+				<h3 class="banner-title">Green Plots Blog</h3>
 				<p class="banner-subtitle"></p>
 			</div>
 		</header>
@@ -93,106 +93,24 @@
 				<div id="main" class="row-fluid">
 					<section  id="content" class="span13" role="main">
 						<div id="post-content-container">
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="1" />
-							<article class="post-25 post type-post status-publish format-standard hentry category-architecture category-decorations category-luxury category-sales tag-custom tag-interior clearfix" id="post-25">
+
+							{% for post in posts %}
+							<img width="1170" height="450" src={{ post.mediaurl }} class="attachment-single-blog-post wp-post-image" alt="1" />
+							<article class="post-25 post type-post status-publish format-standard hentry clearfix" id="post-25">
 								<header>
 									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Lectus non rutrum pulvinar urna leo dignissim lorem" rel="bookmark">
-											Lectus non rutrum pulvinar urna leo dignissim lorem
+										<a title={{ post.title }} rel="bookmark">
+											{{ post.title }}
 										</a>
 									</h2>
 									<!-- .entry-meta -->
 								</header>
 								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
+									<p>{{ post.posttext }}</p>
 								</div><!-- .entry-content -->
 							</article>
+							{% endfor %}
 							
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="3" />
-							<article class="post-23 post type-post status-publish format-standard hentry category-comfort category-garden category-luxury category-market-updates tag-custom tag-trend clearfix" id="post-23">
-								<header>
-									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Aenean dignissim dignissim lorem pellentesque felis risus" rel="bookmark">
-											Aenean dignissim dignissim lorem pellentesque felis risus
-										</a>
-									</h2><!-- .entry-meta -->
-								</header>
-								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
-								</div><!-- .entry-content -->
-							</article>
-							
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="2" />
-							<article class="post-15 post type-post status-publish format-standard hentry category-comfort category-green-energy category-market-updates tag-beach tag-interior clearfix" id="post-15">
-								<header>
-									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Porta lorem ipsum dolor sit amet, consectetur adipiscing" rel="bookmark">
-											Porta lorem ipsum dolor sit amet, consectetur adipiscing
-										</a>
-									</h2><!-- .entry-meta -->
-								</header>
-								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
-								</div><!-- .entry-content -->
-							</article>
-							
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="Laptop" />
-							<article class="post-1609 post type-post status-publish format-standard hentry category-architecture category-decorations category-luxury category-sales tag-beach tag-interior clearfix" id="post-1609">
-								<header>
-									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Lorem Ipsum Dolor Sit Amet" rel="bookmark">Lorem Ipsum Dolor Sit Amet</a>
-									</h2><!-- .entry-meta -->
-								</header>
-								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
-								</div><!-- .entry-content -->
-
-							</article>
-							
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="College student" />
-							<article class="post-1608 post type-post status-publish format-standard hentry category-comfort category-green-energy category-luxury tag-garden-2 tag-interior clearfix" id="post-1608">
-								<header>
-									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Suspen disse auctor dapibus neque pulvinar urna leo" rel="bookmark">Suspen disse auctor dapibus neque pulvinar urna leo</a>
-									</h2>
-									 <!-- .entry-meta -->
-								</header>
-								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
-								</div><!-- .entry-content -->
-
-							</article>
-							
-							<img width="1170" height="450" src="../static/images/dummy-870x450.png" class="attachment-single-blog-post wp-post-image" alt="3" />
-							<article class="post-1817 post type-post status-publish format-standard hentry category-architecture category-decorations category-market-updates tag-beach tag-garden-2 tag-trend clearfix" id="post-1817">
-								<header>
-									<h2 class="entry-title">
-										<a href="blog-single.html" title="Permalink to Aliquam quam lectus pulvinar urna leo dignissim lorem" rel="bookmark">Aliquam quam lectus pulvinar urna leo dignissim lorem</a>
-									</h2>
-									 <!-- .entry-meta -->
-								</header>
-								<div class="entry-content clearfix">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore [&hellip;]</p>
-									<div class="read-more">
-										<a href="blog-single.html">Read more&nbsp; >></a>
-									</div>
-								</div><!-- .entry-content -->
-							</article>
 						</div><!-- /.post-content-container -->
 						 
 					</section><!-- #content --><!-- #sidebar -->

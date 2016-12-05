@@ -99,7 +99,7 @@
 								<div class="row-fluid property-listing status-35 clearfix">
 									<div class="listing-image span5">
 										<div class="property-image-container">
-											<a href="property-single.html" title="Florida 5, Pinecrest, FL">
+											<a href="{{ url_for('propertysingle',listingid=listing.listingid) }}" title="Florida 5, Pinecrest, FL">
 												<img width="540" height="360" src= {{ listing.imageurls[0] }} class="attachment-real-property-loop wp-post-image" alt="Florida 5, Pinecrest, FL" title="Florida 5, Pinecrest, FL" />
 											</a>
 										</div><!-- /.property-images-container -->
@@ -114,7 +114,7 @@
 									</div>
 									<div class="listing-info span7">
 										<div class="listing-title">
-											<a href="property-single.html" title="Florida 5, Pinecrest, FL">{{ listing.address }}</a>
+											<a href="{{ url_for('propertysingle',listingid=listing.listingid) }}" title="Florida 5, Pinecrest, FL">{{ listing.address }}</a>
 											
 										</div>
                                         <div class="badges1">

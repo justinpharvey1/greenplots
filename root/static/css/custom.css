@@ -1329,6 +1329,10 @@ area[title]{
 	
 }
 
+
+
+
+
 .attribute-price, #sidebar .attribute-price{
 	font-size:24px;
 	font-weight:600;
@@ -1551,6 +1555,12 @@ area[title]{
 
 .partners-logo-wrapper{
 }
+
+
+
+
+
+
 
 
 /*------------------------------------------------------*/
@@ -1917,6 +1927,13 @@ area[title]{
 #content article.post {
 	margin-bottom: 0;
 }
+
+/*------------------------------------------------------*/
+/*  Property Listing Archives   */
+/*------------------------------------------------------*/
+
+
+
 
 #content #post-content-container{
 	border: 1px solid #e2e8ec;
@@ -2411,8 +2428,8 @@ a img.aligncenter {
 
 #myCarousel .carousel-inner {
 	position: relative;
-	max-height:350px;
-	width: 100%;
+	max-height:600px;
+	width: 80%;
 	overflow: hidden;
 }
 
@@ -2959,6 +2976,11 @@ text-align: left;
 	left:0px;
 }
 
+
+
+
+
+
 /*-------------------------------------------------------------------*/
 /*	Button Style	*/
 /*-------------------------------------------------------------------*/
@@ -3019,6 +3041,7 @@ text-align: left;
 	height: 40px;
 	margin-right: 20px;
 }
+
 
 /*-------------------------------------------------------------------*/
 /*	Contact Page Template	*/
@@ -3943,3 +3966,6 @@ text-align: left;
  img {max-width: 100% !important;}
  ul {    padding-left: 0px !important;    margin-bottom: 0px !important;}
 .row-fluid .span13 {background-color:#fff;}
+#myCarousel .carousel-indicators {padding: 15px !important; height:auto;}
+
+.carousel-indicators {width: 95% !important;text-align: left !important;}
