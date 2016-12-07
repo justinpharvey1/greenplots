@@ -150,7 +150,8 @@
 								<!-- Animation --> 
 								<script>
   								function toggleVisibility(id) {
-  									var filestring = "";
+
+  									var filestring = "houserender";
 
   									var solar = document.getElementById("checksolar");
   									if (solar.checked){
@@ -177,17 +178,64 @@
   									
 
 
-  									alert(filestring);
+  									var el = document.getElementById("houserender");
+   									el.style.visibility="hidden";
+
+   									
+
+   									var el = document.getElementById("houserender_well_heater");
+   									el.style.visibility="hidden";
 
 
 
+   									var el = document.getElementById("houserender_well");
+   									el.style.visibility="hidden";
 
+   									var el = document.getElementById("houserender_solar");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_well");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_well_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_bubble");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_bubble_well");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_bubble_well_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_solar_bubble_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_bubble");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_bubble_well");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_bubble_well_heater");
+   									el.style.visibility="hidden";
+
+   									var el = document.getElementById("houserender_bubble_heater");
+   									el.style.visibility="hidden";
 
 
 
    									var el = document.getElementById(filestring);
-   									el.style.visibility=="visible"
-
+   									el.style.visibility="visible";
+  									
+   								}
 								</script>
 
 
@@ -227,17 +275,18 @@
 
 
 
+
 						{% if listings is not defined %}
 						<div class="animation-countainer">
 							<img id="houserender" src="../static/images/houserenders/houserender.png" style="position:absolute; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar" src="../static/images/housrenders/houserender_solar.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar" src="../static/images/houserenders/houserender_solar.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar_bubble" src="../static/images/houserenders/houserender_solar_bubble" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_bubble" src="../static/images/houserenders/houserender_solar_bubble.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
@@ -245,75 +294,59 @@
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar_heater" src="../static/images/houserenders/housrender_solar_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_heater" src="../static/images/houserenders/houserender_solar_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar_bubble_well" src="../static/images/houserenders/housrender_solar_bubble_well" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_bubble_well" src="../static/images/houserenders/houserender_solar_bubble_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="housrender_solar_well_heater" src="../static/images/houserenders/houserender_solar_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_well_heater" src="../static/images/houserenders/houserender_solar_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar_bubble_heater" src="../static/images/housrenders/housrender_solar_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_bubble_heater" src="../static/images/houserenders/houserender_solar_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_solar_bubble_well_heater" src="../static/images/housrenders/houserender_solar_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_solar_bubble_well_heater" src="../static/images/houserenders/houserender_solar_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_bubble" src="../static/images/housrenders/houserender_bubble.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_bubble" src="../static/images/houserenders/houserender_bubble.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="housrender_bubble_well" src="../static/images/housrenders/housrender_bubble_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_bubble_well" src="../static/images/houserenders/houserender_bubble_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="housrender_bubble_heater" src="../static/images/housrenders/houserender_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_bubble_heater" src="../static/images/houserenders/houserender_bubble_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_bubble_well_heater" src="../static/images/housrenders/houserender_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_bubble_well_heater" src="../static/images/houserenders/houserender_bubble_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="houserender_well" src="../static/images/housrenders/houserender_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_well" src="../static/images/houserenders/houserender_well.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="housrender_well_heater" src="../static/images/houserenders/houserender_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_well_heater" src="../static/images/houserenders/houserender_well_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 
 						<div class="animation-container">
-							<img id="housrender_heater" src="../static/images/housrenders/houserender_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
+							<img id="houserender_heater" src="../static/images/houserenders/houserender_heater.png" style="position:absolute; visibility:hidden; width:1140px;"/>
 						</div>
 						{% endif %}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<!-- search results if listing variable present -->	
-					</section><!-- /.advance-search -->
-					{% for listing in listings %}
+						<!-- search results if listing variable present -->	
+						</section><!-- /.advance-search -->
+						{% for listing in listings %}
 								<div class="row-fluid property-listing status-35 clearfix">
 									<div class="listing-image span5">
 										<div class="property-image-container">
@@ -374,7 +407,7 @@
 
 							{% endfor %}
 							</div>
-				</div><!-- /#archive-wrapper -->
+					</div><!-- /#archive-wrapper -->
 				 
 			</div><!-- /.container-->
 		</div>
