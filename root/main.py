@@ -87,6 +87,151 @@ def blog():
 
 
 
+
+
+
+
+
+
+
+@app.route('/admin.html', methods= ['GET'])
+def admin():
+
+  listingToDelete = request.args.get('listingToDelete', '')
+  listingToAdd = request.args.get('listingToAdd', '')
+  solarImprovementLink = request.args.get('solarImprovementLink', '')
+  insulationImprovementLink = request.args.get('insulationImprovementLink', '')
+  waterImprovementLink = request.args.get('waterImprovementLink', '')
+
+
+
+
+  if (len(listingToDelete) > 1 ):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "delete from featuredlistings where listingid=" + str(listingToDelete)
+    print query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\n\nDelete!!!\n\n"
+
+
+
+  if (len(listingToAdd) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "insert into featuredlistings values (" + str(listingToAdd) + ")"
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\nAdd!!!\n\n"
+
+
+
+  if (len(solarImprovementLink) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "update referrals set url='"  + str(solarImprovementLink) + "' where title='solar'"
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\Solar Link Updated!!!\n\n"
+
+
+  if (len(insulationImprovementLink) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "update referrals set url='"  + str(insulationImprovementLink) + "' where title='insulation'"
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\Insulation Link Updated!!!\n\n"
+
+
+  if (len(waterImprovementLink) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "update referrals set url='"  + str(waterImprovementLink) + "' where title='water'"
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\Water Link Updated!!!\n\n"
+
+
+  return render_template('admin.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
 def normalizeListingsData(listings):
   #Deal with badges
   for listing in listings:

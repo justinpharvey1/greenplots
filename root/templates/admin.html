@@ -1,0 +1,68 @@
+<HTML>
+
+
+
+	<style>
+  		.bottom-three {
+			margin-bottom: 3cm;
+  		}
+	</style>
+
+
+
+	<HEAD>
+		<TITLE>Your Title Here</TITLE>
+	</HEAD>			
+		<H1>Green Plots Admin</H1>
+
+
+
+		<P> Update featured listings here...
+			<form action = "http://localhost:5000/admin.html" method = "GET">
+				<label>Add Featured Listing (MLS #):</label> <input type="text" name="listingToAdd">
+				<input type = "submit" value="&nbsp;" />
+			</form>
+
+
+
+			<form action = "http://localhost:5000/admin.html" method = "GET">
+				<label>Delete Featured Listing (MLS #):</label> <input type="text" name="listingToDelete">
+				<input type = "submit" value="&nbsp;" />
+			</form>
+		</P>
+
+
+
+
+
+		<P class="bottom-three">
+		</P>
+
+
+
+
+		<P> Update referral links here...
+			<form action = "http://localhost:5000/admin.html" method = "GET">
+				<label>Solar Improvement Link:</label> <input type="text" name="solarImprovementLink">
+				<input type = "submit" value="&nbsp;" />
+			</form>
+
+
+
+			<form action = "http://localhost:5000/admin.html" method = "GET">
+				<label>Insulation Improvement Link:</label> <input type="text" name="insulationImprovementLink">
+				<input type = "submit" value="&nbsp;" />
+			</form>
+
+
+
+			<form action = "http://localhost:5000/admin.html" method = "GET">
+				<label>Well Water Link:</label> <input type="text" name="waterImprovementLink">
+				<input type = "submit" value="&nbsp;" />
+			</form>
+		</P>
+
+
+
+	</BODY>
+</HTML>
