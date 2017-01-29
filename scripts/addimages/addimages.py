@@ -38,7 +38,7 @@ def uploadBatch():
 
 
 	with conn.cursor() as cursor:
-		query = "select listingid from mlsdata where imageurls is null limit 250"
+		query = "select listingid from mlsdata where imageurls is null limit 50"
 		cursor.execute(query)
 
 		properties = cursor.fetchall()

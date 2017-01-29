@@ -94,8 +94,8 @@ def blog():
 
 
 
-@app.route('/admin.html', methods= ['GET'])
-def admin():
+@app.route('/supersecretadmin.html', methods= ['GET'])
+def supersecretadmin():
 
   listingToDelete = request.args.get('listingToDelete', '')
   listingToAdd = request.args.get('listingToAdd', '')
