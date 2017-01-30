@@ -2,6 +2,14 @@
 
 <html lang="en">
 
+
+<style>
+  	.bottom-one {
+		margin-bottom: .5cm;
+	}
+</style>
+
+
 <head>
 
     <meta charset="utf-8">
@@ -131,7 +139,6 @@
                                                 {% if badge|string() == 'wellwater'|string() %}
                                                 <img width="50" height="50" src="../static/images/water.png" alt="water" title="water" />
                                                 {% endif %}
-
                                                 
 
                                                 {% if badge|string() == 'solar'|string() %}
@@ -146,8 +153,52 @@
 								<div class="single-property-content"> {{ listing.description }} &nbsp;</p> </div>
 							 
 
-							 	<div> Land Profile </div>
-								 
+							 	<div class="single-property-content-wrapper">
+									<header class="single-property-header">
+										<h3 class="single-property-title">Land Profile</h3>
+									</header>
+								</div>
+
+
+								<div class="bottom-one">
+									EcoScore: This property scores a {{ listing.ecoscore }} 	
+								</div>
+
+
+								<div class="bottom-one">
+										{% if 'wellwater' in listing.badges %}
+											Water: This property features a private or closely shared water well. 
+										{% else %}
+											Water: This property may have the potential for a ground well. Find out more here: {{ waterlink }}
+										{% endif %}		
+								</div>
+
+
+								<div class="bottom-one">
+										{% if 'solar' in listing.badges %}
+											Solar: This property has solar panels installed. 
+										{% else %}
+											Solar: This property has the potential to generate its power with clean, renewable solar energy. Find out more here: {{ solarlink }}
+										{% endif %}		
+								</div>
+
+
+								<div class="bottom-one">
+										{% if 'electric' in listing.badges %}
+											Heater: This property uses an eco-friendly, all-electric heater.  
+										{% else %}
+											Heater: This property has the potential to heat water efficiently with a lower environmental impact. Find out more here: {{ heaterlink }}
+										{% endif %}		
+								</div>
+
+
+								<div class="bottom-one">
+										{% if 'certified' in listing.badges %}
+											Insulation: This property is LEED certified for excellent insulation. 
+										{% else %}
+											Insulation: This property has the potential to retain heat in an eco-friendly way. Find out more here: {{ insulationlink }}
+										{% endif %}		
+								</div>
 								 
 							</div>
 						</article>

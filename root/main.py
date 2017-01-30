@@ -33,6 +33,9 @@ def featuredlistings():
 
 
 
+
+
+
 @app.route('/find-your-home.html', methods= ['GET'])
 def findyourhome():
   zipcode = request.args.get('zipcode', '')
@@ -58,8 +61,39 @@ def findyourhome():
 
 
 
+
+
+
+
+
 @app.route('/property-single.html')
 def propertysingle():
+
+  #Get Referral Links
+  rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+  name = "greenplots"
+  password = "Greenplots1"
+  db_name = "greenplotsdb"
+  logger = logging.getLogger()
+  logger.setLevel(logging.INFO)
+  try:
+    conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+  except:
+    logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+    sys.exit()
+  query = "select * from referrals"
+  print query
+  with conn.cursor() as cur:
+    cur.execute(query)
+    conn.commit()
+    conn.close()
+  links = cur.fetchall()
+  for link in links:
+    print "\ lik: " +  str(link)
+  print "\n\Retrieved Referral Links Successfully!!!\n\n"
+
+
+  #Get listing Info
   listingid = request.args.get('listingid')
   lambdaURL = "https://cr2jk3hj7b.execute-api.us-west-2.amazonaws.com/prod"
   headers = {'Content-Type', 'application/json'}
@@ -72,7 +106,12 @@ def propertysingle():
 
   #for element in listing:
     #print "Element \n\n", element
-  return render_template('property-single.html', listing=listing[0])
+  return render_template('property-single.html', listing=listing[0], waterlink=links[0][1], solarlink=links[1][1], insulationlink=links[2][1], heaterlink=links[3][1])
+
+
+
+
+
 
 
 
@@ -93,7 +132,6 @@ def blog():
 
 
 
-
 @app.route('/supersecretadmin.html', methods= ['GET'])
 def supersecretadmin():
 
@@ -102,6 +140,7 @@ def supersecretadmin():
   solarImprovementLink = request.args.get('solarImprovementLink', '')
   insulationImprovementLink = request.args.get('insulationImprovementLink', '')
   waterImprovementLink = request.args.get('waterImprovementLink', '')
+  heaterImprovementLink = request.args.get('heaterImprovementLink', '')
 
 
 
@@ -216,6 +255,33 @@ def supersecretadmin():
     conn.commit()
     conn.close()
     print "\Water Link Updated!!!\n\n"
+
+
+
+
+  if (len(heaterImprovementLink) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "update referrals set url='"  + str(heaterImprovementLink) + "' where title='heater'"
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\Heater Link Updated!!!\n\n"    
+
+
+
 
 
   return render_template('admin.html')
