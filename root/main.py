@@ -129,6 +129,12 @@ def blog():
 
 
 
+@app.route('/manage-your-listing.html')
+def manageYourListing(): 
+
+  return render_template('manage-your-listing.html')
+
+
 
 
 
