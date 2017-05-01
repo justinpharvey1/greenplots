@@ -10,6 +10,7 @@ from urlparse import urlparse
 app = Flask(__name__)
 
 
+
 @app.route('/')
 @app.route('/index.html')
 def homepage():
@@ -29,8 +30,6 @@ def featuredlistings():
 
 
   return render_template('featured-eco-homes.html', listings=listings)
-
-
 
 
 
@@ -63,9 +62,6 @@ def findyourhome():
 
 
 
-
-
-
 @app.route('/property-single.html')
 def propertysingle():
 
@@ -85,12 +81,20 @@ def propertysingle():
   print query
   with conn.cursor() as cur:
     cur.execute(query)
-    conn.commit()
-    conn.close()
   links = cur.fetchall()
   for link in links:
     print "\ lik: " +  str(link)
   print "\n\Retrieved Referral Links Successfully!!!\n\n"
+
+
+
+  #User uploaded data
+  userdata = []
+  query = "select solar, water, heater, insulation, land from useruploads where mlsnumber=" + str(request.args.get('listingid')) + " and status='active'"
+  with conn.cursor() as cur2: 
+    cur2.execute(query)
+    conn.close()
+  userdata = cur2.fetchone()
 
 
   #Get listing Info
@@ -106,7 +110,7 @@ def propertysingle():
 
   #for element in listing:
     #print "Element \n\n", element
-  return render_template('property-single.html', listing=listing[0], waterlink=links[0][1], solarlink=links[1][1], insulationlink=links[2][1], heaterlink=links[3][1])
+  return render_template('property-single.html', listing=listing[0], userdata=userdata, waterlink=links[0][1], solarlink=links[1][1], insulationlink=links[2][1], heaterlink=links[3][1])
 
 
 
@@ -129,10 +133,80 @@ def blog():
 
 
 
-@app.route('/manage-your-listing.html')
+@app.route('/manage-your-listing.html', methods= ['GET'])
 def manageYourListing(): 
+  address = request.args.get('address', '')
 
-  return render_template('manage-your-listing.html')
+
+  if len(address) > 2: 
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "SELECT address, zipcode, price, ecoscore, description, listingid FROM mlsdata WHERE address LIKE " + "'%" + address + "%'"
+    print query
+    results = []
+    with conn.cursor() as cur:
+      cur.execute(query)
+      results = cur.fetchall()
+    print "RESULTS: ", results
+    conn.close()
+    return render_template('manage-your-listing.html', results=results)
+
+
+  else: 
+    return render_template('manage-your-listing.html')
+
+
+
+
+@app.route('/submit-your-listing.html', methods= ['GET'])
+def submitYourListing():
+
+  print "checkpointttt"
+
+  name = request.args.get('name', '')
+  email = request.args.get('email', '')
+  user = request.args.get('user', '')
+  solar = request.args.get('solar', '')
+  water = request.args.get('water', '')
+  heater = request.args.get('heater', '')
+  insulation = request.args.get('insulation', '')
+  land = request.args.get('land', '')
+  mlsnumber = request.args.get('mlsnumber', '')
+
+  rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+  name = "greenplots"
+  password = "Greenplots1"
+  db_name = "greenplotsdb"
+  logger = logging.getLogger()
+  logger.setLevel(logging.INFO)
+  try:
+    conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+  except:
+    logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+    sys.exit()
+
+  query = "insert into useruploads (username, email, usertype, solar, water, heater, insulation, land, mlsnumber) values ('" + str(name) + "','" + str(email) + "','" + str(user) + "','" + str(solar) + "','" + str(water) + "','" + str(heater) + "','" + str(insulation) + "','" + str(land) + "','" + str(mlsnumber) + "')" 
+  print query
+  with conn.cursor() as cur:
+    cur.execute(query)
+  conn.commit()
+  conn.close()
+  return render_template('posting-successful.html')
+
+
+
+
+
 
 
 
@@ -147,6 +221,7 @@ def supersecretadmin():
   insulationImprovementLink = request.args.get('insulationImprovementLink', '')
   waterImprovementLink = request.args.get('waterImprovementLink', '')
   heaterImprovementLink = request.args.get('heaterImprovementLink', '')
+  mlsNumber = request.args.get('mlsnumber', '')
 
 
 
@@ -284,16 +359,60 @@ def supersecretadmin():
       cur.execute(query)
     conn.commit()
     conn.close()
-    print "\Heater Link Updated!!!\n\n"    
+    print "\Heater Link Updated!!!\n\n" 
+
+
+
+  if (len(mlsNumber) > 1):
+    #rds settings
+    rds_host  = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+    name = "greenplots"
+    password = "Greenplots1"
+    db_name = "greenplotsdb"
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    try:
+      conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+    except:
+      logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+      sys.exit()
+    query = "update useruploads set status='active' where mlsnumber ="  + str(mlsNumber)
+    print "query: " + query
+    with conn.cursor() as cur:
+      cur.execute(query)
+    conn.commit()
+    conn.close()
+    print "\Heater Link Updated!!!\n\n"
 
 
 
 
+  rds_host = "greenplots.cqd6sxiozckk.us-west-2.rds.amazonaws.com"
+  name = "greenplots"
+  password = "Greenplots1"
+  db_name = "greenplotsdb"
+  logger = logging.getLogger()
+  logger.setLevel(logging.INFO)
+  try:
+    conn = pymysql.connect(rds_host, user=name, passwd=password, db=db_name, connect_timeout=10)
+  except:
+    logger.error("ERROR: Unexpected error: Could not connect to MySql instance.")
+    sys.exit()
 
-  return render_template('admin.html')
+  query = "select username, email, usertype, solar, water, heater, insulation, land, mlsnumber from useruploads where status='pending'"
+  results = []
+  with conn.cursor() as cur:
+    cur.execute(query)
+    results = cur.fetchall()
+  conn.close()
 
 
+  if len(results) > 0:
+    print "PENDING LISTINGS: ", results
+    return render_template('admin.html', results=results)
 
+  else: 
+    return render_template('admin.html')
 
 
 

@@ -6,12 +6,28 @@
   		.bottom-three {
 			margin-bottom: 3cm;
   		}
+  		table {
+    		font-family: arial, sans-serif;
+    		border-collapse: collapse;
+    		width: 100%;
+		}
+
+		td, th {
+    		border: 1px solid #dddddd;
+    		text-align: left;
+    		padding: 8px;
+		}
+
+		tr:nth-child(even) {
+    		background-color: #dddddd;
+		}
 	</style>
 
 
 
+
 	<HEAD>
-		<TITLE>Your Title Here</TITLE>
+		<TITLE>Green Plots</TITLE>
 	</HEAD>			
 		<H1>Green Plots Admin</H1>
 
@@ -65,6 +81,49 @@
 			</form>
 		</P>
 
+		<br></br>
+		<br></br>
+
+
+		<table>
+			<tr>
+				<th>Accept</th>
+    			<th>Name</th>
+    			<th>Email</th>
+    			<th>User Type</th>
+    			<th>Solar</th>
+    			<th>Water</th>
+    			<th>Heater</th>
+    			<th>Insulation</th>
+    			<th>Land</th>
+    			<th>MLS Number</th>
+  			</tr>
+  
+
+			{% if results is defined %}
+			{% for result in results %}
+
+				<tr>
+					<td>
+						<form action = "http://localhost:5000/supersecretadmin.html" method = "GET">
+							<input type=submit value="accept" style="width:100%">
+							<input type="hidden" name="mlsnumber" value="{{ result[8] }}">
+						</form>
+					</td>
+    				<th>{{ result[0] }} </th>
+    				<th>{{ result[1] }}</th>
+    				<th>{{ result[2] }}</th>
+    				<th>{{ result[3] }}</th>
+    				<th>{{ result[4] }}</th>
+    				<th>{{ result[5] }}</th>
+    				<th>{{ result[6] }}</th>
+    				<th>{{ result[7] }}</th>
+    				<th>{{ result[8] }}</th>
+  				</tr>
+
+			{% endfor %}
+			{% endif %}
+		</table>
 
 
 	</BODY>

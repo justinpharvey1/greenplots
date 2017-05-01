@@ -77,9 +77,6 @@
                     <li>
                         <a href="manage-your-listing.html">Manage Your Listing</a>
                     </li>
-                     <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
 
                 </ul>
                 
@@ -159,7 +156,7 @@
 
 							 	<div class="single-property-content-wrapper">
 									<header class="single-property-header">
-										<h3 class="single-property-title">Land Profile</h3>
+										<h3 class="single-property-title">MLS Land Profile</h3>
 									</header>
 								</div>
 
@@ -203,6 +200,24 @@
 											Insulation: This property has the potential to retain heat in an eco-friendly way. Find out more here: {{ insulationlink }}
 										{% endif %}		
 								</div>
+
+
+                                <div class="single-property-content-wrapper">
+                                    <header class="single-property-header">
+                                        <h3 class="single-property-title">Eco-Data From the Homeowner</h3>
+                                    </header>
+                                </div>
+
+
+                                <div class="bottom-one">
+                                        {% for item in userdata %}  
+                                            <div class="bottom-one">
+                                                {{ item }}    
+                                            </div>
+                                            <br></br>
+                                        {% endfor %} 
+                                </div>
+
 								 
 							</div>
 						</article>

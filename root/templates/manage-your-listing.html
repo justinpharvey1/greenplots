@@ -66,12 +66,84 @@
                     <li class="active">
                         <a href="manage-your-listing.html">Manage Your Listing</a>
                     </li>
-                     <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
                 </ul>
                 
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
+
+
+
+        <!-- Intro Section -->
+    <header id="banner">
+            <div id="banner_container" class="container">
+                <h3 class="banner-title">Add Data to your Listing</h3>
+                <p class="banner-subtitle"></p>
+            </div>
+    </header>
+
+
+        <div class="content-wrapper clearfix">
+            <div class="container">
+                <div id="archive-wrapper">
+                    <section class="advance-search">
+                        <div class="as-form-wrapper">
+                            <form class="advance-search-form clearfix form-inline" action = "http://localhost:5000/manage-your-listing.html" method = "GET">
+
+                              <div class="option-bar location">
+                                    <span class="inputzipcode">
+                                     <label>Street Address:</label> <input type="text" name="address" class="input-zip">
+                                    </span>
+                                </div>  
+
+                                <div class="option-submit">
+                                    <input type = "submit" class="advance-button-search" value="&nbsp";  /></p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div><!-- /.as-form-wrapper -->
+            </div><!-- /.container-->
+        </div>
+
+
+        {% for result in results %}
+            <div class="row-fluid property-listing status-35 clearfix">
+
+               <p> Address: {{ result[0] }} </p>
+
+               <p> Zipcode: {{ result[1] }} </p>
+
+               <p> Price: {{ result[2] }} </p>
+
+               <p> Ecoscore: {{ result[3] }} </p>
+
+               <p> Description: {{ result[4] }} </p>
+
+                <br> </br>
+
+               <p> Add data to this listing... <p>
+
+                <form action="http://localhost:5000/submit-your-listing.html" method="get">
+                    <input type="hidden" name="mlsnumber" value="{{ result[5] }}">
+                    <div> <label>Your Name: </label><input type="text" name="name"></div>
+                    <div> <label>Your Email Adress: </label><input type="text" name="email"></div>
+                    <div> I am the...<select name="user"> 
+                        <option value="Owner">Owner</option>
+                        <option value="Agent">Agent</option>
+                    </select> </div>
+                    <div> <label>Solar Description: </label><input type="text" name="solar"></div>
+                    <div> <label>Well Water Description: </label><input type="text" name="water"></div>
+                    <div> <label>Heater Description: </label><input type="text" name="heater"></div>
+                    <div> <label>Insulation Description: </label><input type="text" name="insulation"></div>
+                    <div> <label>Land/Lot Description: </label><input type="text" name="land"></div>
+                    <div> <input type="submit" name="submit"> </div>
+                </form>
+
+            </div>
+        {% endfor %}
+
+
+
 </body>
